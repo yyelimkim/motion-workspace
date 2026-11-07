@@ -570,6 +570,8 @@
   // the breathing room before the zoom: from the end of Teru's turn to the
   // zoom's start, Teru subtly shrinks (eased in and out); the zoom takes it from there
   const BREATH_SHRINK = 0.04;
+  const BREATH_TIME = 0.32;              // how long the shrink takes, before the zoom
+  const BREATH_EASE = [0.5, 0, 0.3, 1];  // soft start, soft settle
   // Teru's travel in to the centre: the same share as its turn (arrives upright)
   const TERU_MOVE_SHARE = TERU_TURN_SHARE;
   function quickLine(time, share = OTHERS_QUICK) {
@@ -637,11 +639,14 @@
       q.s *= ev('5 rise.creep', 's', time);
       // before the zoom: one slow, steady shrink (no quick pull-back), from
       // when Teru arrives in the centre right up to the zoom
-      const b0 = at('4 line.line') + (VALS['4 line.line.duration'] || 1) * TERU_MOVE_SHARE;
+      // (the last BREATH_TIME before the zoom, never before Teru has arrived;
+      // eased in and out, settling just as the zoom starts)
+      const arrived = at('4 line.line') + (VALS['4 line.line.duration'] || 1) * TERU_MOVE_SHARE;
       const b1 = at('6 zoom in.zoom');
+      const b0 = Math.max(arrived, b1 - BREATH_TIME);
       if (b1 > b0) {
         const k = clamp((time - b0) / (b1 - b0));
-        q.s *= 1 - BREATH_SHRINK * (0.5 - 0.5 * Math.cos(Math.PI * k));
+        q.s *= 1 - BREATH_SHRINK * bezier(BREATH_EASE, k);
       }
     }
     return q;
