@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+references/*-analysis/
+*.mp4
+*.mov
+!assets/**/*.mp4
+__pycache__/

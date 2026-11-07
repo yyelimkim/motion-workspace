@@ -1,0 +1,102 @@
+/* Motion Workspace: the page around the frame, and the dock add-ons. */
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #1c1c1c;
+  overflow: clip;  /* clip, not hidden: nothing can scroll the page, even by accident */
+}
+body.is-export { background: none; }
+
+/* The frame, at the scene's size, scaled to fit by engine.js */
+.fit {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform-origin: 50% 0;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  background: var(--frame-bg, #f0f0f0);
+}
+
+/* Pieces are placed by a matrix from their top-left corner (MW.place) */
+.p {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Timeline multi-select (timeline-select.js) */
+.dialkit-timeline-clip.is-multi { outline: 2px solid #11b2e4; outline-offset: 1px; }
+.tl-marquee {
+  position: fixed;
+  display: none;
+  z-index: 2147483000;
+  border: 1px solid #11b2e4;
+  background: rgba(17, 178, 228, 0.18);
+  pointer-events: none;
+}
+/* A collapsed scene's sequence bar */
+.tl-seq {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  box-sizing: border-box;
+  border-radius: 7px;
+  background: rgba(250, 250, 250, 0.88);
+  color: #272727;
+  font: 500 11px/1 system-ui, sans-serif;
+  cursor: grab;
+  overflow: hidden;
+  touch-action: none;
+}
+.tl-seq:active { cursor: grabbing; }
+.tl-seq span { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); white-space: nowrap; pointer-events: none; }
+.tl-seq i { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(39, 39, 39, 0.22); pointer-events: none; }
+.tl-seq.is-multi { outline: 2px solid #11b2e4; outline-offset: 1px; }
+
+/* Speed graph (speed-graph.js): opened from DialKit's clip editor */
+.sg {
+  position: fixed;
+  right: 16px;
+  top: 64px;
+  z-index: 2147482000;
+  display: none;
+  width: 420px;
+  padding: 10px 12px 12px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: #161616;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  color: #e8e8e8;
+  font: 12px/1.3 system-ui, sans-serif;
+}
+.sg.is-open { display: block; }
+.sg-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: move; }
+.sg-title { flex: 1; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sg button { font: inherit; color: inherit; background: #262626; border: 1px solid #333; border-radius: 6px; padding: 3px 8px; cursor: pointer; }
+.sg button.is-on { background: #e8e8e8; color: #161616; border-color: #e8e8e8; }
+.sg-tabs { display: flex; gap: 4px; }
+.sg-close { width: 24px; padding: 3px 0; }
+.sg-canvas { display: block; width: 100%; height: auto; border-radius: 8px; touch-action: none; }
+.sg-readout { display: flex; justify-content: space-between; gap: 8px; margin: 6px 2px; color: #bdbdbd; font-variant-numeric: tabular-nums; }
+.sg-presets { display: flex; flex-wrap: wrap; gap: 4px; }
+.sg-hint { margin: 8px 2px 0; color: #7a7a7a; }
+.dialkit-timeline-popover-header .sg-open {
+  margin-left: auto;
+  margin-right: 6px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.dialkit-timeline-popover-header .sg-open:hover { background: rgba(255, 255, 255, 0.08); }
