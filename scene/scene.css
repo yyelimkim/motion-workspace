@@ -1,36 +1,4 @@
-/* The example scene's look. Replace with your project's design tokens. */
+/* The scene's look: your project's design tokens and pieces go here. */
 :root {
   --frame-bg: #f0f0f0;
-  --c1: #ddca4f;
-  --c2: #2a9f3a;
-  --c3: #11b2e4;
-  --c4: #da236f;
-  --c5: #fc91b1;
-  --ink: #272727;
-}
-.card {
-  width: 300px;
-  height: 420px;
-  box-sizing: border-box;
-  border: 1px solid var(--ink);
-  border-radius: 28px;
-  box-shadow: inset 0 0 0 14px rgba(255, 255, 255, 0.85), inset 0 0 0 15px var(--ink);
-}
-.card span {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 30px;
-  text-align: center;
-  font: 400 22px/1 Georgia, serif;
-  color: var(--ink);
-}
-.title {
-  margin: 0;
-  transform-origin: 0 0;
-  font: 400 72px/1 Georgia, serif;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  translate: -50% -50%;
-  white-space: nowrap;
 }

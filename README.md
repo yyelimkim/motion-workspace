@@ -23,7 +23,8 @@ UI moments — keyframe by keyframe, then exporting them as MP4.
 python3 -m http.server 8140
 ```
 
-Open http://localhost:8140/ — the example scene plays, with the timeline below.
+Open http://localhost:8140/ — a blank scene with an empty timeline, ready
+for a new piece.
 Your edits save in the browser (localStorage `dialkit:<scene id>`); the dock's
 version menu keeps versions side by side; **Copy** exports the values.
 
@@ -31,8 +32,8 @@ version menu keeps versions side by side; **Copy** exports the values.
 
 1. Put references in `references/` and study them:
    `python3 tools/analyze-reference.py references/ref.mov`
-2. Replace `scene/scene.js` and `scene/scene.css` (assets in `assets/`).
-   Give the scene a new `id` so it gets a fresh save slot.
+2. Fill in `scene/scene.js` and `scene/scene.css` (assets in `assets/`).
+   Give the scene its own `id` so it gets its own save slot.
 3. Shape the timing in the dock; tune the shape in code.
 4. Export: `node tools/export.js --out ~/Desktop/piece.mp4 --fps 60`, then in
    the workspace tab's console run `sendForExport()` so the export uses your
@@ -68,6 +69,16 @@ window.SCENE = {
 - **One layer order** for the whole piece: no piece ever jumps in front of
   another mid-move.
 - **Hand-offs read the previous shot** at the hand-off time, so nothing jumps.
+
+## The skill
+
+`skill/SKILL.md` is the Claude Code skill that goes with this workspace: how to
+start a piece, study references, and the motion rules learned so far. To use
+it on a new machine:
+
+```
+mkdir -p ~/.claude/skills/motion-workspace && cp skill/SKILL.md ~/.claude/skills/motion-workspace/
+```
 
 ## Credits
 
