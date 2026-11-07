@@ -19,7 +19,7 @@ const path = require('path');
 const http = require('http');
 
 const arg = (name, dflt) => { const i = process.argv.indexOf(`--${name}`); return i > 0 ? process.argv[i + 1] : dflt; };
-const URL_ = arg('url', 'http://localhost:8140/');
+const URL_ = arg('url', 'http://localhost:8140/projects/blank/');
 const FPS = Number(arg('fps', 60));
 const OUT = path.resolve((arg('out', path.join(os.homedir(), 'Desktop', 'motion-export.mp4'))).replace(/^~/, os.homedir()));
 const STORAGE = arg('storage');
@@ -70,7 +70,7 @@ async function main() {
     await send('Page.enable');
     await send('Runtime.enable');
     // your timeline into this profile's storage, on the page's origin
-    await send('Page.navigate', { url: new URL('README.md', URL_).href });
+    await send('Page.navigate', { url: new URL('/README.md', URL_).href });
     await sleep(600);
     await evaluate(`(() => { const s = ${JSON.stringify(storage)}; for (const k in s) if (s[k] != null) localStorage.setItem(k, s[k]); return true; })()`);
     // the scene's size first, then the page at exactly that size

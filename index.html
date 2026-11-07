@@ -3,23 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Motion Workspace</title>
-  <link rel="stylesheet" href="vendor/dialkit/styles.css">
-  <link rel="stylesheet" href="workspace/workspace.css">
-  <link rel="stylesheet" href="scene/scene.css">
+  <title>Motion Workspace · Library</title>
+  <style>
+    :root {
+      --bg: #1c1c1c;
+      --card: #262626;
+      --line: #333;
+      --text: #e8e8e8;
+      --muted: #8a8a8a;
+    }
+    html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, sans-serif; }
+    main { max-width: 1120px; margin: 0 auto; padding: 48px 24px 64px; }
+    h1 { margin: 0 0 4px; font-size: 28px; font-weight: 600; letter-spacing: -0.02em; }
+    .sub { margin: 0 0 32px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    a.card { display: block; color: inherit; text-decoration: none; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: border-color 0.15s, transform 0.15s; }
+    a.card:hover { border-color: #555; transform: translateY(-2px); }
+    .thumb { aspect-ratio: 16 / 9; background: #f0f0f0 center / cover no-repeat; display: grid; place-items: center; color: #9a9a9a; font-size: 40px; }
+    .thumb.is-blank { background: #202020; border-bottom: 1px dashed var(--line); }
+    .body { padding: 14px 16px 16px; }
+    .title { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+    .desc { margin: 0 0 10px; color: #bdbdbd; font-size: 13.5px; }
+    .meta { color: var(--muted); font-size: 12.5px; }
+  </style>
 </head>
 <body>
-  <!-- The frame: every moment drawn by the scene's render(t), from the
-       DialKit timeline docked below -->
-  <div class="fit" id="fit">
-    <div class="frame" id="frame"></div>
-  </div>
-
-  <script src="vendor/dialkit/browser.global.js"></script>
-  <script src="workspace/mw.js"></script>
-  <script src="scene/scene.js"></script>
-  <script src="workspace/timeline-select.js"></script>
-  <script src="workspace/speed-graph.js"></script>
-  <script src="workspace/engine.js"></script>
+  <main>
+    <h1>Motion Workspace</h1>
+    <p class="sub">Library — open a project to edit it on its timeline, or start a new piece.</p>
+    <div class="grid" id="grid"></div>
+  </main>
+  <script>
+    fetch('projects/projects.json').then((r) => r.json()).then((list) => {
+      const grid = document.getElementById('grid');
+      for (const p of list) {
+        const a = document.createElement('a');
+        a.className = 'card';
+        a.href = `projects/${p.slug}/`;
+        const thumb = p.blank ? '<div class="thumb is-blank">+</div>'
+          : `<div class="thumb" style="background-image:url('${p.poster}')"></div>`;
+        a.innerHTML = `${thumb}<div class="body"><p class="title"></p><p class="desc"></p><div class="meta"></div></div>`;
+        a.querySelector('.title').textContent = p.title;
+        a.querySelector('.desc').textContent = p.description;
+        a.querySelector('.meta').textContent = [p.size, p.date].filter(Boolean).join(' · ');
+        grid.appendChild(a);
+      }
+    });
+  </script>
 </body>
 </html>

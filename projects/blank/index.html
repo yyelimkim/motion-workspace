@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motion Workspace</title>
+  <link rel="stylesheet" href="../../vendor/dialkit/styles.css">
+  <link rel="stylesheet" href="../../workspace/workspace.css">
+  <link rel="stylesheet" href="scene.css">
+</head>
+<body>
+  <!-- The frame: every moment drawn by the scene's render(t), from the
+       DialKit timeline docked below -->
+  <div class="fit" id="fit">
+    <div class="frame" id="frame"></div>
+  </div>
+
+  <script src="../../vendor/dialkit/browser.global.js"></script>
+  <script src="../../workspace/mw.js"></script>
+  <script src="scene.js"></script>
+  <script src="../../workspace/timeline-select.js"></script>
+  <script src="../../workspace/speed-graph.js"></script>
+  <script src="../../workspace/shortcuts.js"></script>
+  <script src="../../workspace/engine.js"></script>
+</body>
+</html>

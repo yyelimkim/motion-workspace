@@ -1,0 +1,341 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #1c1c1c;
+  color: var(--system-white);
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking);
+  overflow: clip;  /* clip, not hidden: nothing can scroll the page, even by accident */
+}
+
+/* The 1980 x 1080 frame, scaled to fit the window by thumb.js */
+.fit {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1980px;
+  height: 1080px;
+  transform-origin: 50% 0;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  overflow: clip;  /* the cards that run off its edges can't scroll it */
+  /* Neutral 100 under the paper grain, as the app's splash */
+  background: url("lib/assets/system/paper-shade.png") 0 0 / 732px auto, var(--neutral-100);
+}
+
+/* Every moving piece is placed by a matrix from its top-left corner */
+.p {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* A card: the 520 x 743 Figma frame; the artwork's corners are square in
+   the export, so the card's own 47px corner clips it */
+.card {
+  width: 520px;
+  height: 743px;
+  border-radius: 47px;
+  overflow: hidden;
+}
+.card img { display: block; width: 520px; height: 743px; }
+
+/* Teru Teru Bozu (Figma 1520:3184), built from its layers so it can open
+   up: the blue and the paper spread to the frame's edges, the frame and
+   words fly out, and the doll swings on its string */
+.hero { width: 520px; height: 743px; }
+.hero .lay {
+  position: absolute;
+  left: calc(-1 * var(--L));
+  top: calc(-1 * var(--L));
+  width: calc(520px + 2 * var(--L));
+  height: calc(743px + 2 * var(--L));
+}
+.hero .in { position: absolute; left: var(--L); top: var(--L); width: 520px; height: 743px; }
+.hero .blue { background: var(--v2-blue); }
+.hero .paper {
+  mix-blend-mode: multiply;
+  background: url("assets/teru/texture-r180.jpg") calc(var(--L) - 18px) calc(var(--L) - 18px) / 553px 774px repeat;
+}
+.hero .edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 520px;
+  height: 743px;
+  box-sizing: border-box;
+  border: 1px solid var(--system-black);
+  border-radius: 47px;
+}
+.hero img, .hero .knot { position: absolute; display: block; max-width: none; }
+.hero .knot {
+  width: 40.03px;
+  height: 16.284px;
+  box-sizing: border-box;
+  background: #413636;
+  border: 1.5px solid var(--system-black);
+  border-radius: 119.275px;
+}
+.hero .doll { position: absolute; left: 0; top: 0; width: 520px; height: 743px; transform-origin: 252.3px 5px; }
+.hero .fly { position: absolute; left: 0; top: 0; width: 520px; height: 743px; transform-origin: 260px 371.5px; }
+.hero .words {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.44px;
+  color: var(--system-black);
+  text-align: center;
+  white-space: nowrap;
+}
+.hero .tag-box {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid var(--system-black);
+}
+
+/* The phone (the app's home, 402 x 874) */
+.phone { width: 402px; height: 874px; }
+.phone .screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 56px;
+  overflow: hidden;
+  background: url("lib/assets/system/paper-shade.png") 0 0 / 402px auto, var(--neutral-100);
+  box-shadow: 0 0 0 10px #111;
+}
+.phone .status--time {
+  position: absolute;
+  left: 22px;
+  top: 13px;
+  width: 96px;
+  font: 600 17px/22px -apple-system, "SF Pro Text", Inter, sans-serif;
+  letter-spacing: -0.5px;
+  text-align: center;
+  color: #111;
+}
+.phone .status--island {
+  position: absolute;
+  left: 140px;
+  top: 7px;
+  width: 122px;
+  height: 34px;
+  border-radius: 999px;
+  background: #000;
+}
+.phone .status--right { position: absolute; left: 294px; top: 17.4px; width: 77.6px; height: 13.2px; }
+.phone .head {
+  position: absolute;
+  top: 54px;
+  left: 0;
+  width: 402px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-sizing: border-box;
+  color: var(--system-black);
+}
+.phone .head--title { display: flex; align-items: center; gap: 6px; }
+.phone .head--title h1 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: 27px;
+  letter-spacing: var(--tracking-title);
+  line-height: normal;
+}
+.phone .head--count {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 44px;
+  padding: 0 18px;
+  box-sizing: border-box;
+  border-radius: 36px;
+  background: var(--system-white);
+  filter: drop-shadow(0 4px 2px rgba(168, 164, 164, 0.2));
+  font-size: 16px;
+}
+.phone .side { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.phone .tick {
+  position: absolute;
+  width: 1.5px;
+  height: 16px;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--neutral-700) 40%, transparent);
+  transform-origin: 50% 0;
+}
+.phone .tick.is-current { height: 20px; background: var(--neutral-700); }
+.phone .m-nav {
+  position: absolute;
+  left: 91px;
+  top: 781px;
+  width: 220px;
+  height: 51px;
+  display: flex;
+  padding: 4px;
+  gap: 4px;
+  box-sizing: border-box;
+  background: var(--system-white);
+  border-radius: 999px;
+}
+.phone .m-nav--tab { position: relative; flex: 1; border: 1px solid transparent; border-radius: 999px; }
+.phone .m-nav--tab.is-current { background: var(--neutral-100); border-color: var(--neutral-500); }
+.phone .m-nav--tab img { position: absolute; left: 50%; top: 50%; display: block; }
+.phone .homebar {
+  position: absolute;
+  left: 124px;
+  bottom: 8px;
+  width: 154px;
+  height: 5px;
+  border-radius: 100px;
+  background: #111;
+}
+
+/* The logo (the app's splash, Figma 486:5534) and the line under it */
+.logo svg { display: block; overflow: visible; }
+.logo .splash--clover { transform-box: view-box; transform-origin: 52px 118px; }
+.tagline {
+  margin: 0;
+  width: 1980px;
+  text-align: center;
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-title);
+  color: var(--system-black);
+}
+
+/* Preview controls */
+.controls {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+}
+.controls button {
+  font: inherit;
+  padding: 6px 16px;
+  border: 1px solid var(--neutral-500);
+  border-radius: 999px;
+  background: var(--system-black);
+  color: var(--system-white);
+  cursor: pointer;
+}
+.controls input[type="range"] { width: min(560px, 50vw); }
+.controls #time { width: 56px; font-variant-numeric: tabular-nums; }
+
+/* Timeline multi-select (timeline-select.js) */
+.dialkit-timeline-clip.is-multi {
+  outline: 2px solid var(--v2-blue);
+  outline-offset: 1px;
+}
+.tl-marquee {
+  position: fixed;
+  display: none;
+  z-index: 2147483000;
+  border: 1px solid var(--v2-blue);
+  background: color-mix(in srgb, var(--v2-blue) 18%, transparent);
+  pointer-events: none;
+}
+
+/* A collapsed scene's sequence bar (timeline-select.js): one long bar from
+   its first clip's start to its last clip's end, ticks where each clip starts */
+.tl-seq {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  box-sizing: border-box;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--system-white) 88%, transparent);
+  color: var(--system-black);
+  font: 500 11px/1 var(--font-display);
+  letter-spacing: var(--tracking);
+  cursor: grab;
+  overflow: hidden;
+  touch-action: none;
+}
+.tl-seq:active { cursor: grabbing; }
+.tl-seq span {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.tl-seq i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--system-black) 22%, transparent);
+  pointer-events: none;
+}
+.tl-seq.is-multi {
+  outline: 2px solid var(--v2-blue);
+  outline-offset: 1px;
+}
+
+/* Graph editor (speed-graph.js): After Effects' Speed Graph for a clip */
+.sg {
+  position: fixed;
+  right: 16px;   /* beside the preview, clear of DialKit's own clip editor */
+  top: 64px;
+  z-index: 2147482000;
+  display: none;
+  width: 420px;
+  padding: 10px 12px 12px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: #161616;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  color: #e8e8e8;
+  font: 12px/1.3 var(--font-display);
+  letter-spacing: var(--tracking);
+}
+.sg.is-open { display: block; }
+.sg-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: move; }
+.sg-title { flex: 1; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sg button {
+  font: inherit;
+  color: inherit;
+  background: #262626;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+.sg button.is-on { background: #e8e8e8; color: #161616; border-color: #e8e8e8; }
+.sg-tabs { display: flex; gap: 4px; }
+.sg-close { width: 24px; padding: 3px 0; }
+.sg-canvas { display: block; width: 100%; height: auto; border-radius: 8px; touch-action: none; }
+.sg-readout { display: flex; justify-content: space-between; gap: 8px; margin: 6px 2px; color: #bdbdbd; font-variant-numeric: tabular-nums; }
+.sg-presets { display: flex; flex-wrap: wrap; gap: 4px; }
+.sg-hint { margin: 8px 2px 0; color: #7a7a7a; }
+/* The "Speed graph" button in DialKit's clip editor header */
+.dialkit-timeline-popover-header .sg-open {
+  margin-left: auto;
+  margin-right: 6px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.dialkit-timeline-popover-header .sg-open:hover { background: rgba(255, 255, 255, 0.08); }

@@ -5,3 +5,4 @@ references/*-analysis/
 *.mov
 !assets/**/*.mp4
 __pycache__/
+projects/*/lib/assets/fonts/CooperLtBT-Regular.ttf

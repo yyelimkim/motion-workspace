@@ -12,6 +12,8 @@ UI moments — keyframe by keyframe, then exporting them as MP4.
   - **Scene bars:** collapse a scene and it becomes one bar you can drag.
   - **Speed graph:** in a clip's editor, press *Speed graph* for an After
     Effects–style speed/value graph with influence handles and presets.
+  - **Shortcuts:** Space plays/pauses; clicking outside an open clip editor
+    or speed graph closes it.
 - **Reference analysis:** measure a recording's speed curves and fit them to
   cubic-beziers.
 - **Export:** a hidden Chrome renders every frame at full size; macOS's own
@@ -23,8 +25,8 @@ UI moments — keyframe by keyframe, then exporting them as MP4.
 python3 -m http.server 8140
 ```
 
-Open http://localhost:8140/ — a blank scene with an empty timeline, ready
-for a new piece.
+Open http://localhost:8140/ — the library: open a project, or **New piece** for
+a blank scene and empty timeline.
 Your edits save in the browser (localStorage `dialkit:<scene id>`); the dock's
 version menu keeps versions side by side; **Copy** exports the values.
 

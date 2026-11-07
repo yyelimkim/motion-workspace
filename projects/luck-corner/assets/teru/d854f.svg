@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="87.4291" height="31.6756" viewBox="0 0 87.4291 31.6756" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="face">
+<g id="blush">
+<circle id="blush-L" cx="11.4038" cy="19.0055" r="11.4038" fill="#FC91B1"/>
+<circle id="blush-R" cx="76.0253" cy="20.2719" r="11.4038" fill="#FC91B1"/>
+</g>
+<g id="eyes">
+<circle id="lefteye" cx="17.575" cy="7.43902" r="7.43901" fill="#272727"/>
+<circle id="righteye" cx="66.0526" cy="8.70632" r="7.43901" fill="#272727"/>
+</g>
+<path id="mouth" d="M30.4104 20.2738C33.7893 25.131 42.8279 31.931 51.9509 20.2738" stroke-width="1.5" stroke-linecap="round" stroke="#272727"/>
+</g>
+</svg>

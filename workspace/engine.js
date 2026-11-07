@@ -109,6 +109,7 @@
     new ResizeObserver(resize).observe(dock);
     window.enableTimelineMultiSelect(dock, ID);
     window.enableSpeedGraph(dock, ID);
+    window.enableShortcuts(dock, ID);
     resize();
     tl.subscribe((v) => draw(v.time), true);
   });

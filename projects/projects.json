@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "blank",
+    "title": "New piece",
+    "description": "A blank scene and an empty timeline. Copy this folder to start a new project.",
+    "size": "1920 × 1080",
+    "blank": true
+  },
+  {
+    "slug": "luck-corner",
+    "title": "Luck Corner thumbnail",
+    "description": "Portfolio thumbnail for the Luck Corner app: a card deck tips, fans out and lines up; Teru Teru Bozu is chosen, zoomed into, and lands in the app before the logo draws on. Versions V1–V3 saved with it.",
+    "size": "1980 × 1080 · 7.5 s",
+    "poster": "projects/luck-corner/poster.webp",
+    "date": "November 2026"
+  }
+]

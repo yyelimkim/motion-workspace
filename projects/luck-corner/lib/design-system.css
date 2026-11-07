@@ -1,0 +1,125 @@
+/* 행운보관소 design system, from the Figma file (개념디자인):
+   - colours: the local "Variable collection", "New" mode
+   - type: Paperlogy 4 Regular at -2% tracking, as used throughout the file
+   - tag: the "Categories" component set (332:1883)
+   Shared by the desktop page and the iPhone prototype. */
+
+@font-face {
+  font-family: "Paperlogy";
+  src: url("assets/fonts/Paperlogy-4Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paperlogy";
+  src: url("assets/fonts/Paperlogy-5Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Paperlogy";
+  src: url("assets/fonts/Paperlogy-6SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* Page titles (Figma 376:5463): Cooper Light BT */
+@font-face {
+  font-family: "Cooper Lt BT";
+  src: url("assets/fonts/CooperLtBT-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* Colour variables */
+  --yellow-green: #ddca4f;
+  --forest-green: #2a9f3a;
+  --v2-blue: #11b2e4;
+  --light-pink: #fc91b1;
+  --hot-pink: #da236f;
+  --yellow: #f0f2a1;
+  /* Neutrals (Figma: SystemWhite, Neutral100–900, System Black). System
+     White is the raised surface (fields, sheets, buttons); Neutral 100 the
+     paper every screen sits on */
+  --system-white: #fafafa;
+  --neutral-100: #f0f0f0;
+  --neutral-300: #dbdbdb;  /* disabled buttons' fill */
+  --neutral-500: #c4c4c4;  /* outlined buttons' line; the current tab's ring */
+  --neutral-700: #878787;
+  --neutral-900: #565656;  /* disabled buttons' words */
+  --system-black: #272727;
+
+  /* Type */
+  --font-display: "Paperlogy", sans-serif;
+  --tracking: -0.02em;
+  --font-title: "Cooper Lt BT", serif;  /* titles: 3px up on the Paperlogy size, at -3% */
+  --tracking-title: -0.03em;
+
+  /* Each category's colour */
+  --protection: var(--hot-pink);
+  --calm: var(--forest-green);
+  --luck: var(--yellow-green);
+  --success: var(--v2-blue);
+}
+
+/* Category tag: a label between two coloured squares, each holding the
+   category's icon. <span class="tag" data-category="protection">…</span>,
+   built by categoryTag() in cards.js. */
+.tag {
+  --tag-h: 33px;
+  --tag-stroke: 1px;
+  display: inline-flex;
+  width: 175.889px;
+  height: var(--tag-h);
+  color: var(--system-black);
+}
+.tag--icon {
+  flex: none;
+  width: var(--tag-h);
+  height: var(--tag-h);
+  border: var(--tag-stroke) solid var(--system-black);
+  background: var(--tag-color) var(--tag-icon) center / auto no-repeat;
+}
+.tag--icon:last-child { background-image: var(--tag-icon-end, var(--tag-icon)); }
+.tag--label {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  background: var(--neutral-100);
+  border-block: var(--tag-stroke) solid var(--system-black);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--tag-size, 18.515px);
+  letter-spacing: var(--tracking);
+  line-height: normal;
+  white-space: nowrap;
+}
+/* Longer words are set a size down, as in Figma */
+.tag[data-category="protection"] {
+  --tag-color: var(--protection);
+  --tag-icon: url("assets/system/protection.svg");
+  --tag-size: 17px;
+}
+.tag[data-category="calm"] {
+  --tag-color: var(--calm);
+  --tag-icon: url("assets/system/calm.svg");
+}
+.tag[data-category="luck"] {
+  --tag-color: var(--luck);
+  --tag-icon: url("assets/system/luck.svg?v=2");
+}
+.tag[data-category="success"] {
+  --tag-color: var(--success);
+  --tag-icon: url("assets/system/success-left.svg?v=2");
+  --tag-icon-end: url("assets/system/success-right.svg?v=2");
+  --tag-size: 17.008px;
+}
+
+/* A tag carrying a card's name (Figma 341:2493): as wide as the name needs */
+.tag--named { width: auto; }
+.tag--named .tag--label {
+  flex: none;
+  padding: 0 18px;
+  font-size: 17px;
+}

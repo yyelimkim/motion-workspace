@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Star 8">
+<path d="M17.5 0L22.2266 12.7734L35 17.5L22.2266 22.2266L17.5 35L12.7734 22.2266L0 17.5L12.7734 12.7734L17.5 0Z" fill="#F0F2A1"/>
+<mask id="stroke0_0_22" fill="white">
+<path d="M17.5 0L22.2266 12.7734L35 17.5L22.2266 22.2266L17.5 35L12.7734 22.2266L0 17.5L12.7734 12.7734L17.5 0Z"/>
+</mask>
+<path d="M17.5 0L22.2266 12.7734L35 17.5L22.2266 22.2266L17.5 35L12.7734 22.2266L0 17.5L12.7734 12.7734L17.5 0Z" stroke-width="2" stroke="#272727" mask="url(#stroke0_0_22)"/>
+</g>
+</svg>
