@@ -563,10 +563,10 @@
 
   // The cards other than Teru line up, leave and sink all at once, and
   // quicker than Teru: within this share of the Line clip's time, on its curve
-  const OTHERS_QUICK = 0.38;
+  const OTHERS_QUICK = 0.45;
   // Teru's own turn to upright: eased in and out, over this share of the clip
   const TERU_TURN = [0.45, 0, 0.25, 1];
-  const TERU_TURN_SHARE = OTHERS_QUICK;   // turns upright as fast as the others leave
+  const TERU_TURN_SHARE = 0.38;   // Teru turns upright over this share of the Line clip
   // the breathing room before the zoom: from the end of Teru's turn to the
   // zoom's start, Teru subtly shrinks (eased in and out); the zoom takes it from there
   const BREATH_SHRINK = 0.04;
@@ -579,7 +579,14 @@
     return ev('4 line.line', 'p', a + (time - a) / share);
   }
   // the two dropping beside Teru go faster still
-  const SINK_QUICK = 0.25;
+  const SINK_QUICK = 0.3;
+  // the others' exit: eased in and out (off the mark gently, then away)
+  const OTHERS_EASE = [0.45, 0, 0.35, 1];
+  function leaveK(time, share) {
+    const a = at('4 line.line');
+    const d = VALS['4 line.line.duration'] || 1;
+    return bezier(OTHERS_EASE, clamp((time - a) / (d * share)));
+  }
 
   // The fan's spin: each card turns on its own centre for the WHOLE fan —
   // from the moment it spreads until 0.2 s into the line's anticipation —
@@ -601,7 +608,7 @@
     const pTip = ev('2 stack.tip', 'p', time);
     const pSpread = ev('3 fan.spread', 'p', time);
     // Teru on the Line clip; the others together, quicker
-    const pLine = i === TERU ? ev('4 line.line', 'p', time) : quickLine(time);
+    const pLine = i === TERU ? ev('4 line.line', 'p', time) : leaveK(time, OTHERS_QUICK);
     const pRise = ev('5 rise.rise', 'p', time);
     let q = cardPose(i, ev('1 card.push', 'p', time), ev('2 stack.anticipate', 'w', time));
     q = lp(q, stackPose(i, pTip, ev('3 fan.anticipate', 'w', time)), pTip);
@@ -628,7 +635,7 @@
     if (SINK[i]) {
       // the two cards behind Teru: sinking and fading while they line up
       // (or on the Sink clip, if that's dragged earlier)
-      const pSink = Math.max(quickLine(time, SINK_QUICK), ev('5 rise.sink', 'p', time));
+      const pSink = Math.max(leaveK(time, SINK_QUICK), ev('5 rise.sink', 'p', time));
       q = lp(q, SINK[i], pSink);
     } else {
       q = lp(q, RISE[i] || linePose(i, 0), pRise);
