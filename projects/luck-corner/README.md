@@ -7,7 +7,7 @@ lands in the app's home screen before the Luck Corner logo draws itself on.
 
 - `thumb.js` — the whole scene (its own engine; it predates the shared one)
 - `timeline.json` — the saved timeline (versions V1, V2 · anticipation,
-  V3 · fan spin, and the Fan 3D panel); loaded the first time the project
+  V3 · fan spin, V4 · V2 + fan spin, and the Fan 3D panel); loaded the first time the project
   opens in a browser
 - `assets/` — card art exported from Figma; `lib/` — the app's design system,
   fonts and the app assets the scene uses
