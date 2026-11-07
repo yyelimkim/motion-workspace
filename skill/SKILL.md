@@ -45,11 +45,13 @@ worked examples of 3D fans, zoom-into-card, phone UI build-in, logo draw-on.
 - **Anticipation:** measure which way the next move goes (angle and position
   per step) and wind up the opposite way. "Faster the way it was already
   moving" means it was going the wrong way.
-- **Fans:** in the reference, the whole fan turns as one piece (~26°
-  counter-clockwise) and opens (~29%), fast, while each card turns a little
-  further (~42°): the arc never breaks. Cards turning only on their own centres
-  breaks the arc. Every added motion must ease IN too — a curve that starts at
-  full speed reads as a glitch (check speed per frame, not just position).
+- **Fans:** in the reference, each card turns on its OWN centre (~42°
+  counter-clockwise, fast then easing out) while its place on the arc, the
+  spacing and the size stay exactly the same — no group turn, no opening (that
+  reads as a random zoom). Measuring with colour-blob centroids is misleading
+  when cards overlap: check against the frames by eye (gridded stills).
+- **No lurches:** an added motion that starts at full speed on top of another
+  reads as a glitch — check speed per frame, not just position.
 - **Picking one card:** the others line up, leave and sink together and
   quickly (sinking ones fade as they drop); the chosen one turns upright
   gently (eased, a bit slower) and goes straight to centre — no detour,
